@@ -1,0 +1,36 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+
+#: inc/config.class.php:99
+msgid "Add splitted dropdown"
+msgstr ""
+
+#: inc/config.class.php:109
+#: inc/config.class.php:144
+msgid "Enable split"
+msgstr ""
+
+#: inc/config.class.php:140
+msgid "Splitted dropdowns"
+msgstr ""
+
+#: inc/config.class.php:195
+msgid "Splitted dropdown preview"
+msgstr ""
+
+#: inc/config.class.php:197
+msgid "Parent"
+msgstr ""
+
+#: inc/config.class.php:208
+msgid "Children"
+msgstr ""
+
+#: front/config.from.php:64
+msgid "Enable your plugin"
+msgstr ""
