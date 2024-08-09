@@ -31,7 +31,7 @@
  */
 
 class PluginSplitdropdownConfig extends CommonDBTM {
-    
+
     /**
      * canCreate
      *
@@ -40,7 +40,7 @@ class PluginSplitdropdownConfig extends CommonDBTM {
     static function canCreate() {
         return Session::haveRight('plugin_splitdropdown', CREATE);
     }
-    
+
     /**
      * canView
      *
@@ -52,9 +52,9 @@ class PluginSplitdropdownConfig extends CommonDBTM {
 
     /**
      * Open HTML field wrapper
-     * 
+     *
      * @param string $label Field label
-     * 
+     *
      * @return void
      */
     private function startField(string $label, string $id = '') {
@@ -67,14 +67,14 @@ class PluginSplitdropdownConfig extends CommonDBTM {
 
     /**
      * Close HTML field wrapper
-     * 
+     *
      * @return void
      */
     private function endField() {
         echo "</td>";
         echo "</tr>";
     }
-    
+
     /**
      * showFormulaire
      *
@@ -94,37 +94,43 @@ class PluginSplitdropdownConfig extends CommonDBTM {
             "1" => __("Yes"),
         );
 
-        echo "<form id='splitdropdown_form' method='post'>";
-        echo "<table class='tab_cadre' cellpadding='5'>";
-        echo "<tr class='tab_bg_1'><th colspan='2'>" . __("Add splitted dropdown", "splitdropdown") . "</th></tr>";
-
-        // Select ITILCategory or Location
-        $this->startField(__("Dropdown"));
-        Dropdown::showFromArray("categoryOption", $categoryOptions, [
-            "display_emptychoice" => true
-        ]);
-        $this->endField();
-
-        // Select splitting YES / NO ??
-        $this->startField(__("Enable split", "splitdropdown"));
-        Dropdown::showFromArray("splitOption", $splitOptions, [
-            "display_emptychoice" => true
-
-        ]);
-        $this->endField();
-
-        // Set splitting level
-        $this->startField(__("Level"));
-        echo "<input id='levelOption' name='levelOption' type='number'>";
-        $this->endField();
-
-        echo "<tr><td class='center' colspan='2'>";
-        echo "<input name='update' type='submit' class='submit' value='".__("Add")."'>";
-        echo "</td></tr></table>";
-
-        Html::closeForm();
+        $form = [
+            'action' => $this->getFormURL(),
+            'buttons' => [
+                [
+                    'name' => 'update',
+                    'value' => __('Add'),
+                    'class' => 'btn btn-secondary',
+                ],
+            ],
+            'content' => [
+                __('Add splitted dropdown', 'splitdropdown') => [
+                    'visible' => true,
+                    'inputs' => [
+                        __('Dropdown') => [
+                            'type' => 'select',
+                            'name' => 'categoryOption',
+                            'values' => [Dropdown::EMPTY_VALUE] + $categoryOptions,
+                            'required' => true,
+                        ],
+                        __('Enable split', 'splitdropdown') => [
+                            'type' => 'select',
+                            'name' => 'splitOption',
+                            'values' => [Dropdown::EMPTY_VALUE] + $splitOptions,
+                            'required' => true,
+                        ],
+                        __('Level') => [
+                            'type' => 'number',
+                            'name' => 'levelOption',
+                            'required' => true,
+                        ],
+                    ],
+                ]
+            ],
+        ];
+        renderTwigForm($form);
     }
-    
+
     /**
      * showTable
      *
@@ -161,7 +167,7 @@ class PluginSplitdropdownConfig extends CommonDBTM {
         }
         echo "</table>";
     }
-    
+
     /**
      * showPreview
      *
@@ -200,7 +206,7 @@ class PluginSplitdropdownConfig extends CommonDBTM {
         if ($split === 1) {
             $itemType::dropdown([
                 "name" => "parent_dropdown_",
-                "condition" => ["level =" . $level],
+                "conditions" => ["level" => $level],
             ]);
             echo "</td>";
             echo "</tr>";
@@ -234,7 +240,7 @@ class PluginSplitdropdownConfig extends CommonDBTM {
                     }
                 });
                 if($('select[id^=dropdown_parent_dropdown]').val() !== "0") $('#childrenArea').show();
-                else 
+                else
                 {
                     $('#childrenArea').hide();
                 }

@@ -39,6 +39,6 @@ if (isset($_GET['fk'])) {
     $_GET['itemType']::dropdown([
         $sons,
         "name" => $_GET['itemType_id'],
-        "condition" => [$_GET['itemType_id'] . "=" . $_GET['fk']],
+        "conditions" => [$_GET['itemType_id'] => $_GET['fk']],
     ]);
 }
