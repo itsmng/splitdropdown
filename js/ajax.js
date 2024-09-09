@@ -21,7 +21,7 @@ async function addDropdowns(options) {
             data: { split: `${options[element]["options"]["split"]}`, level: `${options[element]["options"]["level"]}`, table: `${options[element]["values"]["table"]}`, itemType_id: `${options[element]["values"]["itemType_id"]}`, itemType: `${options[element]["values"]["itemType"]}` },
             success: function (parents) {
                 if (options[element]["options"]["split"] === 1) {
-                    var location = $(`select[id^=dropdown_${options[element]["values"]["itemType_id"]}]`).parent();
+                    var location = $(`select[name^=${options[element]["values"]["itemType_id"]}]`).parent();
                     location.empty();
                     location.html(parents + `<span id='children_${options[element]["values"]["itemType_id"]}'></span>`);
                     $("form").on('submit', function () {
