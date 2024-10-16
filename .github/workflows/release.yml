@@ -31,7 +31,7 @@ jobs:
       - name: Create release
         uses: softprops/action-gh-release@v2
         with:
-          files: /home/runner/work/gdprcompliance/splitdropdown-${{ github.ref_name }}.tgz
+          files: /home/runner/work/splitdropdown/splitdropdown-${{ github.ref_name }}.tgz
           body: "New release is available"
           name: ${{ github.ref_name }}
           draft: true
